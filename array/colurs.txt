@@ -1,0 +1,61 @@
+# Color output in bash 
+htop 
+
+echo '<b>this in bold</b>' 
+echo '<i>this in italic</i>'
+ANSI Escape Sequences are used to add color and formatting to the terminal output
+
+printf '%b' '\x61' '\x0a' | xxd 
+printf '%b' '\x1b' | xxd
+printf '%b' '\x033' | xxd
+printf '%b' '\e' | xxd # this is the escape character that is used to start the ANSI escape sequence
+printf '\e[1mBold\n' # this will make the text bold
+printf '\e[3mItalic\e[0m\n' # this will make the text italic
+printf 'not bold  \e[1mbold\e[0m\n' # this will make the text bold and then reset it to normal
+
+printf 'not bold  \e[1mbold\e[0m\n' 
+
+printf 'this is red \e[31mred\e[0m\n' # this will make the text red
+printf 'this is yellow \e[33myellow\e[0m\n' # this will make the text yellow
+printf 'this is green \e[32mgreen\e[0m\n' # this will make the text green
+
+esc=$'\e' # this is the escape character that is used to start the ANSI escape sequence
+printf 'this is blue %b[34mblue%b[0m\n' "$esc"
+
+there is one command called tput that can be used to get the ANSI escape sequences for the terminal capabilities
+
+tput bold ; echo hi ; tput sgr0
+tput reset; # to reset the terminal to its default state
+
+reset # this will reset the terminal to its default state
+tput setaf 4 ; echo hi ; tput sgr0 # blue colour 
+printf '\e[31m Colur \e[0m\n' # red colour
+printf '\e[32m Colur \e[0m\n' # green colour
+printf '\e[33m Colur \e[0m\n' # yellow colour
+printf '\e[34m Colur \e[0m\n' # blue colour
+printf '\e[35m Colur \e[0m\n' # magenta colour
+printf '\e[36m Colur \e[0m\n' # cyan colour     
+printf '\e[42m Colur \e[0m\n' # this will set the background colour to green
+
+printf '\e[38;5;0m Colur \e[0m\n' # this will set the foreground colour to black using 256 colour mode]
+
+printf '\e[38;5;1m Colur \e[0m\n' # this will set the foreground colour to red using 256 colour mode
+
+
+256-color.sh
+#!/usr/bin/env bash
+for i in {0..255}; do
+   printf '\e[38;5;%dm %3d \e[0m' "$i" "$i"
+done
+
+reference:reference https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+
+
+#for the RGB colour we can use the 24 bit colour mode
+printf '\e[38;2;255;0;0m Red \e[0m\n' # this will set the foreground colour to red using 24 bit colour mode
+
+printf '\e[38;2;0;255;0m Green \e[0m\n' # this will set the foreground colour to green using 24 bit colour mode
+
+printf '\e[38;2;0;0;255m Blue \e[0m\n' # this will set the foreground colour to blue using 24 bit colour mode   
+
+
