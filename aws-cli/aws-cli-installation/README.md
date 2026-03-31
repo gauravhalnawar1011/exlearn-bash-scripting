@@ -30,7 +30,7 @@ Make sure your system has:
 ### 🟢 Debian / Ubuntu
 
 ```bash
-curl -L -O https://raw.githubusercontent.com/gauravhalnawar1011/exlearn-bash-scripting/main/aws-cli/aws-cli-installation/aws-cli-install.sh
+curl -L -O https://raw.githubusercontent.com/gauravhalnawar1011/exlearn-bash-scripting/main/aws-cli/aws-cli-installation/aws-cli-install-debian.sh
 ````
 
 ---
@@ -50,7 +50,7 @@ curl -L -O https://raw.githubusercontent.com/gauravhalnawar1011/exlearn-bash-scr
 ### Debian / Ubuntu
 
 ```bash
-chmod u+x aws-cli-install.sh
+chmod u+x aws-cli-install-debian.sh
 ```
 
 ### RedHat
