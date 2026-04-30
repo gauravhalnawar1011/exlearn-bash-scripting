@@ -13,7 +13,7 @@ resource "aws_security_group" "tf-sg2" {
     from_port = "22"
     to_port = "22"
     protocol = "tcp"
-    cidr_blocks = ["103.123.48.148/32"]
+    cidr_blocks = ["152.56.5.110/32"]
     ipv6_cidr_blocks = ["::/0"]
 
   }

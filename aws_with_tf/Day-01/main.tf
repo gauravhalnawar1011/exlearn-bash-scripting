@@ -4,7 +4,22 @@ resource "aws_instance" "example" {
   instance_type = var.instance_type
   key_name = var.key_name
   subnet_id = var.subnet_id
-  security_groups = ["sg-0bc7e8f61c1c55d64"]
+  security_groups = ["sg-0460954b62e7fc9c4"]
+
+  
+  provisioner "file" {
+    source      = "/home/gaurav-h/exlearn/website/index.html"
+    destination = "/home/ubuntu/index.html"
+  }
+  connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = file("/home/gaurav-h/Downloads/peering-demo.pem")
+      timeout     = "8m"
+   }
+
+
   user_data = <<-EOT
     #!/bin/bash
     apt update -y
