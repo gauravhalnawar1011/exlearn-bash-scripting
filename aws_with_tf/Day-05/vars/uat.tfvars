@@ -1,0 +1,6 @@
+aws_region="ap-south-1"
+ami_id="ami-07a00cf47dbbc844c"
+instance_type="t3.small"
+key_name="peering-demo"
+subnet_id="subnet-0f997207af9a98f20"
+instance_name="uat-workspaces-tf"

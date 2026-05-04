@@ -1,7 +1,7 @@
 resource "aws_security_group" "tf-sg" {
     name = "tf-sg"
     description = "this first sg using tf"
-    vpc_id = "vpc-086ca82e6bbdad5b9"
+    vpc_id = "vpc-0a8444136090ba2f4"
     
   tags = {
     Name = "tf-sg-day3"

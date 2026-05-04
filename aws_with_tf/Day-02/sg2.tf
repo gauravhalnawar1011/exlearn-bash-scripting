@@ -1,7 +1,7 @@
 resource "aws_security_group" "tf-sg2" {
     name = "tf-sg2"
     description = "this first sg using tf"
-    vpc_id = "vpc-086ca82e6bbdad5b9"
+    vpc_id = "vpc-0a8444136090ba2f4"
     
   tags = {
     Name = "tf-sg2-day3"
@@ -13,7 +13,7 @@ resource "aws_security_group" "tf-sg2" {
     from_port = "22"
     to_port = "22"
     protocol = "tcp"
-    cidr_blocks = ["152.56.5.110/32"]
+    cidr_blocks = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
 
   }
