@@ -1,0 +1,63 @@
+# creating sg 
+
+resource "aws_security_group" "custom-sg-tf" {
+    name = "custom-vpc-sg-tf"
+    vpc_id = aws_vpc.main.id
+    description = "this for the aws custom vpc"
+
+  ingress {
+    description = "this for the ssh acces"
+    from_port = "22"
+    to_port = "22"
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+
+  }
+
+ ingress {
+    description = "this for the Http acces"
+    from_port = "80"
+    to_port = "80"
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  
+}
+
+# creating an ec2 insatce 
+
+
+
+resource "aws_instance" "example" {
+  ami           =   "ami-07a00cf47dbbc844c"
+  instance_type = "t3.micro"
+  key_name = "peering-demo"
+  subnet_id = aws_subnet.public-subnet.id
+  security_groups =[aws_security_group.custom-sg-tf.id]
+
+#   user_data = <<-EOT
+#     #!/bin/bash
+#     apt update -y
+#     apt install -y nginx
+#     systemctl start nginx
+#     systemctl enable nginx
+#     # We even use the Terraform variable inside the server!
+#     echo "<h1>Hello from Terraform Locals Demo  environment)</h1>" > /var/www/html/index.html
+# EOT
+
+  tags = {
+    Name = "tf-ec2-custom-vpc"
+  }
+}
