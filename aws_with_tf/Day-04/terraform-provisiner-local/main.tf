@@ -3,44 +3,13 @@ provider "aws" {
 }
 
 # --- Security Group ---
-resource "aws_security_group" "main" {
-  name        = "main-sg"
-  description = "Allow SSH and all outbound traffic"
-
-  ingress = [
-    {
-      description      = "Allow SSH"
-      from_port        = 22
-      to_port          = 22
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      security_groups  = []
-      self             = false
-    }
-  ]
-
-  egress = [
-    {
-      description      = "Allow all outbound traffic"
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      security_groups  = []
-      self             = false
-    }
-  ]
-}
 
 # --- EC2 Instance ---
 resource "aws_instance" "example" {
-  ami                         = "ami-02d26659fd82cf299"
+  ami                         = "ami-07a00cf47dbbc844c"
   instance_type               = "t3.micro"
-  vpc_security_group_ids      = [aws_security_group.main.id]
+  security_groups = ["sg-002c43a0f53539f91"]
+  subnet_id = "subnet-0f997207af9a98f20"
   associate_public_ip_address = true
 
   # Local-exec provisioner (runs locally)
