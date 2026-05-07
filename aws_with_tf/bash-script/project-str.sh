@@ -1,30 +1,33 @@
 #!/bin/bash
 
-root_dir="terraform-vpc"
-sub_dir="modules"
-service="vpc"
-vars_dir="vars"
+root_dir="terraform-aws-infra"
 
-env1="dev"
-env2="qa"
-env3="uat"
-env4="prod"
+echo "Creating Terraform production structure..."
 
-echo "Creating Terraform project structure..."
+# Create root directories
+mkdir -p "$root_dir"/{environments,modules}
 
-# Create directories
-mkdir -p "$root_dir/$sub_dir/$service"
-mkdir -p "$root_dir/$vars_dir"
+# Create environment directories
+mkdir -p "$root_dir/environments"/{dev,qa,uat,prod}
 
-# Create root terraform files
-touch "$root_dir"/{provider,main,variables,outputs,backend}.tf
+# Create module directories
+mkdir -p "$root_dir/modules"/vpc
 
-# Create tfvars files
-touch "$root_dir/$vars_dir"/{"$env1","$env2","$env3","$env4"}.tfvars
+
+
+# Create environment files
+for env in dev qa uat prod
+do
+    touch "$root_dir/environments/$env"/{backend,main,variables,outputs}.tf
+    touch "$root_dir/environments/$env/terraform.tfvars"
+done
 
 # Create module files
-touch "$root_dir/$sub_dir/$service"/{main,variables,outputs}.tf
+for module in vpc # if you want you can add more module here like (alb sg iam)
+do
+    touch "$root_dir/modules/$module"/{main,variables,outputs,providers}.tf
+done
 
 echo
 echo "Project structure created successfully:"
-tree "$root_dir"
+ls -l  "$root_dir"
