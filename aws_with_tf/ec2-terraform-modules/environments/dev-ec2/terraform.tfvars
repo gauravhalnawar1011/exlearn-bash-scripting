@@ -1,0 +1,6 @@
+environment = "dev"
+ec2_ami="ami-07a00cf47dbbc844c"
+instance_type = "t3.micro"
+key_name = "peering-demo"
+subnet_id = "subnet-0f997207af9a98f20"
+security_group = "sg-04b9bbd0c0558a41f"
