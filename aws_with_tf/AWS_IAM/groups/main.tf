@@ -12,9 +12,7 @@ resource "aws_iam_group_membership" "team" {
   name = "tf-testing-group-membership"
 
   users = [
-   "terraform_user_exlearn",
-   "user_2",
-   "user_3"
+   "terraform_user_exlearn"
   ]
 
   group = aws_iam_group.developers.name
