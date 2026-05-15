@@ -1,8 +1,0 @@
-vpc_cidr       = "10.0.0.0/16"
-public_subnet  = "10.0.1.0/24"
-private_subnet = "10.0.11.0/24"
-az1            = "ap-south-1a"
-az2            = "ap-south-1b"
-ami_id         = "ami-07a00cf47dbbc844c"
-instance_type  = "t3.micro"
-key_name       = "peering-demo"

@@ -1,9 +1,7 @@
 terraform {
-  required_version = ">= 1.6"
-
   backend "s3" {
     bucket       = "gaurav-prod-teeraform-state-bucket-074095961179"
-    key          = "infra/network/vpc.tfstate"
+    key          = "compute/infra/ec2/dev/terraform.tfstate"
     region       = "ap-south-1"
     encrypt      = true
     use_lockfile = false
