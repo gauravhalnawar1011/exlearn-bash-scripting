@@ -48,7 +48,7 @@ output "ec2_security_group_id" {
   value = module.security_group.ec2_security_group_id
 }
 
-output "application_url" {
+# output "application_url" {
 
-  value = "https://${module.dns.record_name}"
-}
+#   value = module.dns.record_name
+# }
