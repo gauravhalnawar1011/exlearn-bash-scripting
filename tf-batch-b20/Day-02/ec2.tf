@@ -1,15 +1,10 @@
-
-resource "aws_instance" "example" {
-  ami           =  var.ami_id
+resource "aws_instance" "tf_instace_day_02" {
+  ami           = var.ami_id
   instance_type = var.instance_type
-  key_name = var.key_name
   subnet_id = var.subnet_id
-  associate_public_ip_address = var.associate_public_ip_address
+  key_name = var.key_name
   security_groups = [aws_security_group.aws_tf_sg.id]
-
-  
-
-
+  count = var.instance_count
 
   user_data = <<-EOT
     #!/bin/bash
@@ -21,7 +16,10 @@ resource "aws_instance" "example" {
     echo "<h1>Hello from Terraform Locals Demo  environment)</h1>" > /var/www/html/index.html
 EOT
 
+
+
   tags = {
-    Name = var.instance_name
+    Name = var.instance_tag
+    env = ""
   }
 }

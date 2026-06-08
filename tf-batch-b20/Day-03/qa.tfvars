@@ -1,0 +1,5 @@
+# bucket_name = "my-tf-unique-bucket-exlearn-tech-dev"
+env = "qa"
+# tag_name = "my-tf-unique-bucket-exlearn-tech-dev"
+vpc_cidr = "172.16.0.0/16"
+vpc_name = "qa-vpc-workspaces"

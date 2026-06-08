@@ -1,0 +1,5 @@
+# bucket_name = "my-tf-unique-bucket-exlearn-tech-dev"
+env = "uat"
+# tag_name = "my-tf-unique-bucket-exlearn-tech-dev"
+vpc_cidr = "192.168.0.0/16"
+vpc_name = "uat-vpc-workspaces"

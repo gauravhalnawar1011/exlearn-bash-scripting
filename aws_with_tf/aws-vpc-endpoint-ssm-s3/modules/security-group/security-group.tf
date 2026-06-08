@@ -8,35 +8,69 @@ locals {
 
     Environment = var.environment
 
-    ManagedBy = "Terraform"
+    ManagedBy   = "Terraform"
 
-    Project = var.project_name
+    Project     = var.project_name
   }
 }
 
 #################################################
-# EC2 SECURITY GROUP
+# PRIVATE EC2 SECURITY GROUP
 #################################################
 
 resource "aws_security_group" "ec2" {
 
-  name = "${var.environment}-private-ec2-sg"
+  name        = "${var.environment}-private-ec2-sg"
 
   description = "Private EC2 Security Group"
 
   vpc_id = var.vpc_id
 
   #################################################
-  # NO INBOUND RULES
+  # NO INBOUND
   #################################################
 
   #################################################
-  # HTTPS TO VPC ENDPOINTS
+  # DNS TO VPC RESOLVER
   #################################################
 
   egress {
 
-    description = "HTTPS to VPC Endpoints"
+    description = "DNS UDP"
+
+    from_port = 53
+
+    to_port = 53
+
+    protocol = "udp"
+
+    cidr_blocks = [
+      var.vpc_cidr
+    ]
+  }
+
+  egress {
+
+    description = "DNS TCP"
+
+    from_port = 53
+
+    to_port = 53
+
+    protocol = "tcp"
+
+    cidr_blocks = [
+      var.vpc_cidr
+    ]
+  }
+
+  #################################################
+  # HTTPS TO AWS SERVICES
+  #################################################
+
+  egress {
+
+    description = "HTTPS Outbound"
 
     from_port = 443
 
@@ -44,7 +78,9 @@ resource "aws_security_group" "ec2" {
 
     protocol = "tcp"
 
-    cidr_blocks = [var.vpc_cidr]
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
   }
 
   tags = merge(
@@ -57,4 +93,3 @@ resource "aws_security_group" "ec2" {
     }
   )
 }
-

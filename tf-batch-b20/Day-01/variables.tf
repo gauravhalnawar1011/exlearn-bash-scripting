@@ -28,3 +28,9 @@ variable "subnet_id" {
 variable "instance_name" {
   default = "tf-day-01"
 }
+
+variable "associate_public_ip_address" {
+  type = bool
+  default = true
+}
+
