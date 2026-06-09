@@ -1,0 +1,2 @@
+aws ec2 instace is running on the 43.205.206.120
+13.233.82.188: git version 2.43.0

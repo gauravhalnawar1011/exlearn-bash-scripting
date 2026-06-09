@@ -1,0 +1,7 @@
+aws_region = "ap-south-1"
+subnet_id = "subnet-05b1faf50152f42c7"
+ami_id = "ami-07a00cf47dbbc844c"
+instance_type = "t3.micro"
+instance_name = "tf-day-04"
+key_name = "peering-demo"
+vpc_id = "vpc-0bb84e5d77b5e9123"
