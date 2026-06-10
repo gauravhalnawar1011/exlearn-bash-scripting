@@ -1,0 +1,5 @@
+environment = "qa-exlearn"
+managed_by = "devops-team"
+project_name = "aws-vpc-infra"
+vpc_cidr = "192.168.0.0/24"
+aws_region = "ap-south-1"
