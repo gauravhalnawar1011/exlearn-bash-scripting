@@ -24,13 +24,15 @@ apply() {
   echo "Terraform Plan"
   echo "=================================="
 
-  terraform plan 
+  terraform plan \
+    -var-file=terraform.tfvars
 
   echo "=================================="
   echo "Terraform Apply"
   echo "=================================="
 
-  terraform apply  \
+  terraform apply \
+    -var-file=terraform.tfvars \
     --auto-approve
 }
 
@@ -45,6 +47,7 @@ destroy() {
   echo "=================================="
 
   terraform destroy \
+    -var-file=terraform.tfvars \
     --auto-approve
 }
 

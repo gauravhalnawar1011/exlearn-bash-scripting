@@ -18,23 +18,23 @@ variable "aws_region" {
 }
 
 
-# variable "availability_zones" {
-#   type = list(string)
-# }
+variable "availability_zones" {
+  type = list(string)
+}
 
-# variable "public_subnets" {
-#   type = list(string)
-# }
+variable "public_subnets" {
+  type = list(string)
+}
 
-# variable "private_subnets" {
-#     type = list(string)
+variable "private_subnets" {
+    type = list(string)
   
-# }
+}
 
-# variable "igw_name" {
+variable "igw_name" {
   
-# }
+}
 
-# variable "public_rt_name" {
+variable "public_rt_name" {
   
-# }
+}

@@ -24,3 +24,13 @@ private_subnets = [
 
 igw_name = "exlearn-igw"
 public_rt_name = "exlearn-public-rt"
+# rdp_port = 3389
+
+
+
+
+# ami_id = ""
+# instance_type = ""
+# key_name = ""
+# subnet_id = ""
+# security_groups = ""

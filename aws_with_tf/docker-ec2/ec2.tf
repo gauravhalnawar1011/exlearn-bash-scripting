@@ -47,33 +47,51 @@ resource "aws_instance" "docker_server" {
     aws_security_group.ec2_sg.id
   ]
 
-  user_data = <<-EOF
+user_data = <<-EOF
 #!/bin/bash
+
+set -eux
+
+#################################################
+# UPDATE SYSTEM
+#################################################
 
 dnf update -y
 
 #################################################
-# INSTALL DOCKER
+# INSTALL PACKAGES
 #################################################
 
-dnf install -y docker
+dnf install -y \
+docker \
+git \
+python3 \
+python3-pip
 
 #################################################
-# START DOCKER
+# ENABLE DOCKER
 #################################################
 
 systemctl enable docker
-
 systemctl start docker
 
 #################################################
-# ADD EC2 USER
+# ADD USERS TO DOCKER GROUP
 #################################################
 
 usermod -aG docker ec2-user
-sudo usermod -aG docker ec2-user
 
-newgrp docker
+#################################################
+# VERIFY INSTALLATION
+#################################################
+
+docker --version
+git --version
+python3 --version
+pip3 --version
+
+
+mkdir -p /home/ec2-user/app-stack
 
 EOF
 
