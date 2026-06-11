@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  postgres-db:
+    build:
+      context: ./database
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - student-app-network
+
+  flask-api:
+    build:
+      context: ./backend
+    container_name: flask-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://admin:123456@postgres-db:5432/mydatabase
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres-db
+    networks:
+      - student-app-network
+
+  frontend-ui:
+    build:
+      context: ./frontend
+    container_name: frontend-ui
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - flask-api
+    networks:
+      - student-app-network
+
+volumes:
+  pgdata:
+
+networks:
+  student-app-network:
+    driver: bridge
