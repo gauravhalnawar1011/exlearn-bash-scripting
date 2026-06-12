@@ -37,3 +37,25 @@ variable "igw_name" {
 variable "public_rt_name" {
   type = string
 }
+
+
+variable "ami_id" {
+  
+}
+
+variable "instance_type" {
+  
+}
+
+
+variable "key_name" {
+  
+}
+
+
+variable "instance_name" {
+  
+
+
+}
+

@@ -24,6 +24,16 @@ resource "aws_vpc_security_group_ingress_rule" "allow_http" {
 }
 
 
+
+resource "aws_vpc_security_group_ingress_rule" "custom_tcp" {
+  security_group_id = aws_security_group.aws_tf_sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 8080
+  ip_protocol       = "tcp"
+  to_port           = 8080
+}
+
+
 resource "aws_vpc_security_group_ingress_rule" "allow_rdp" {
   security_group_id = aws_security_group.aws_tf_sg.id
   cidr_ipv4         = "0.0.0.0/0"

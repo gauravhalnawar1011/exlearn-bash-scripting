@@ -27,10 +27,7 @@ public_rt_name = "exlearn-public-rt"
 # rdp_port = 3389
 
 
-
-
-# ami_id = ""
-# instance_type = ""
-# key_name = ""
-# subnet_id = ""
-# security_groups = ""
+ami_id = "ami-0db56f446d44f2f09"
+instance_type = "c7i-flex.large"
+key_name = "peering-demo"
+instance_name = "tf-exlearn-cutom-vpc"

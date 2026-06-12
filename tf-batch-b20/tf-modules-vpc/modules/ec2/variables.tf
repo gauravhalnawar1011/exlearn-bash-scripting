@@ -1,47 +1,39 @@
-variable "aws_region" {
-  type = string
-
-}
-
 variable "ami_id" {
-  type = string 
-
+  type = string
 }
 
 variable "instance_type" {
-  type = string 
-
-}
-
-variable "key_name" {
-  sensitive = true
   type = string
 }
 
 variable "subnet_id" {
-    type = string
+  type = string
+}
 
-  
+variable "key_name" {
+  type = string
+}
+
+variable "security_group_ids" {
+  type = list(string)
 }
 
 variable "instance_name" {
-
+  type = string
 }
 
-
-
 variable "environment" {
-  
+  type = string
 }
 
 variable "managed_by" {
-  
+  type = string
 }
 
 variable "project_name" {
-  
+  type = string
 }
 
-variable "security_groups" {
-  
+variable "aws_region" {
+  type = string
 }

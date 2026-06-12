@@ -23,27 +23,41 @@ module "aws_vpc" {
 
 module "security_groups" {
 
-  source = "../../modules/security_groups"
-  aws_region = var.aws_region
-  environment = var.environment
-  managed_by = var.managed_by
+  source       = "../../modules/security_groups"
+  aws_region   = var.aws_region
+  environment  = var.environment
+  managed_by   = var.managed_by
   project_name = var.project_name
-  vpc_id      = module.aws_vpc.vpc_id
+  vpc_id       = module.aws_vpc.vpc_id
 
-  }
+}
 
-# module "aws_ec2" {
-#   source = "../../modules/ec2"
+module "aws_ec2" {
 
-#   ami             = var.ami_id
-#   instance_type   = var.instance_type
-#   key_name        = var.key_name
-#   subnet_id       = var.subnet_id
-#   security_groups = var.security_groups
+  source = "../../modules/ec2"
 
+  ami_id = var.ami_id
 
-# }
+  instance_type = "c7i-flex.large"
 
+  key_name = "peering-demo"
+
+  subnet_id = module.aws_vpc.public_subnet_ids[0]
+
+  security_group_ids = [
+    module.security_groups.security_group_id
+  ]
+
+  instance_name = var.instance_name
+
+  environment = var.environment
+
+  managed_by = var.managed_by
+
+  project_name = var.project_name
+
+  aws_region = var.aws_region
+}
 
 
 
