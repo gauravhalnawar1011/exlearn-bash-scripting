@@ -6,9 +6,15 @@ from psycopg2 import OperationalError
 from psycopg2.extras import RealDictCursor
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from prometheus_flask_exporter import PrometheusMetrics
 
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+@app.route('/metrics-test')
+def metrics_test():
+    return "metrics working"
 
 CORS(
     app,
@@ -480,7 +486,12 @@ if __name__ == '__main__':
 #5432               this port number whre your continer is listening
 #mydatabase         this defult db name that se set
   
-   app.run(host='0.0.0.0', port=5000, debug=True)
+   app.run(
+    host='0.0.0.0',
+    port=5000,
+    debug=True,
+    use_reloader=False
+)
 
 
 
