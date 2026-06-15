@@ -14,8 +14,8 @@ jobs:
 
   job-3:
     runs-on: ubuntu-24.04
-    needs:
-      - job-1
-      - job-2
+    # needs:
+    #   - job-1
+    #   - job-2
     steps:
       - run: echo "Job 3 runs after Job 1 and Job 2"
