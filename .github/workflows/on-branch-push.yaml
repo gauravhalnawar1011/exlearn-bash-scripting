@@ -1,0 +1,11 @@
+name: main branch code push auto trigger
+
+on:
+  push:
+    branches:
+      - main
+jobs: 
+  job-1:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "hello from the auto trigger main branch gh exlearn"
