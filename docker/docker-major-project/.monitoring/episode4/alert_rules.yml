@@ -1,0 +1,11 @@
+groups:
+  - name: test_alerts
+    rules:
+      - alert: TestAlert
+        expr: vector(1)
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Test Alert"
+          description: "Testing Prometheus Alertmanager Slack integration"

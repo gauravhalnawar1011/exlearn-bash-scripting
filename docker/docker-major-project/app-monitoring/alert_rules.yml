@@ -1,0 +1,38 @@
+groups:
+  - name: application-alerts
+    rules:
+      - alert: FlaskApiDown
+        expr: up{job="flask-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Flask API Down
+          description: Flask API is not responding.
+
+      - alert: High5xxErrors
+        expr: increase(flask_http_request_total{status=~"5.."}[5m]) > 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: HTTP 500 Errors Detected
+          description: Application is generating HTTP 5xx responses.
+
+      - alert: HighCpuUsage
+        expr: rate(container_cpu_usage_seconds_total{name=~".+"}[5m]) > 0.80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: High Container CPU Usage
+          description: Container CPU usage above 80%.
+
+      - alert: HighMemoryUsage
+        expr: container_memory_usage_bytes{name=~".+"} > 500000000
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: High Container Memory Usage
+          description: Container memory usage above 500 MB.
