@@ -1,15 +1,31 @@
-FROM node:alpine
+# ==========================
+# Stage 1 - Dependencies
+# ==========================
 
-WORKDIR  /app 
+FROM node:22-alpine AS builder
 
-COPY .  .
+WORKDIR /app
 
-RUN yarn remove uuid
+RUN corepack enable
 
-RUN yarn add uuid@8.3.2
+COPY package.json yarn.lock* ./
+
 RUN yarn install --production
 
+COPY . .
 
-EXPOSE 3000 
+# ==========================
+# Stage 2 - Runtime
+# ==========================
+
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN corepack enable
+
+COPY --from=builder /app .
+
+EXPOSE 3000
 
 CMD ["node", "src/index.js"]
