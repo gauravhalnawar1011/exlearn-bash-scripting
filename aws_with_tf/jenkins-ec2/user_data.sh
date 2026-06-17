@@ -27,12 +27,19 @@ dnf clean all
 dnf makecache
 
 # Install Jenkins
-dnf install -y jenkins
+dnf install -y \
+jenkins \
+docker \
+git 
+
 
 # Start Jenkins
+systemctl start docker
+systemctl enable docker
 systemctl daemon-reload
 systemctl enable jenkins
 systemctl start jenkins
+
 
 # Wait for startup
 sleep 15
@@ -40,6 +47,10 @@ sleep 15
 # Display status
 systemctl status jenkins --no-pager
 
+usermod -aG docker jenkins
+
+systemctl restart jenkins
+usermod -aG docker jenkins
 # Save initial password to a file for easy access
 cat /var/lib/jenkins/secrets/initialAdminPassword > /home/ec2-user/jenkins-password.txt
 chown ec2-user:ec2-user /home/ec2-user/jenkins-password.txt
