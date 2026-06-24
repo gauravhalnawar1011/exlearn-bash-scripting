@@ -55,28 +55,27 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo crictl config runtime-endpoint unix:///var/run/containerd/containerd.sock
 
 # Initialize Control Plane
+# sudo kubeadm init \
+#   --pod-network-cidr=192.168.0.0/16 \
+#   --apiserver-advertise-address=172.31.2.91 \
+#   --node-name control-plane
+
 sudo kubeadm init \
   --pod-network-cidr=192.168.0.0/16 \
   --apiserver-advertise-address=${MASTER_IP} \
   --node-name control-plane
 
 
-
-
-while [ ! -f /etc/kubernetes/admin.conf ]; do
-  sleep 5
-done
-
-mkdir -p /home/ubuntu/.kube
-
+# Configure kubeconfig for kubectl
+sudo mkdir -p /home/ubuntu/.kube
 sudo cp /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+export KUBECONFIG=/etc/kubernetes/admin.conf
+# Install Calico CN
+kubectl apply --server-side=true -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
+curl -fsSL -o /tmp/custom-resources.yaml https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml
+kubectl apply -f /tmp/custom-resources.yaml
 
-sudo chown ubuntu:ubuntu /home/ubuntu/.kube/config
-
-# Install Calico CNI
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
-curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml
-kubectl apply -f custom-resources.yaml
 
 # Display join command
 echo "✅ Control Plane setup complete!"
